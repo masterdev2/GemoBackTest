@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,16 +10,19 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Automattic\WooCommerce\Client;
-use Automattic\WooCommerce\HttpClient\HttpClientException;
-use App\Entity\Users;
+use App\Fetcher\Fetch;
+use App\Manager\LangManager;
 
 class ApiController extends Controller
 {
     protected $em;
-    public function __construct(EntityManagerInterface $em)
+    protected $fetch;
+    protected $langManager;
+    public function __construct(EntityManagerInterface $em,Fetch $fetch, LangManager $langManager)
     {
         $this->em = $em;
+        $this->fetch = $fetch;
+        $this->langManager = $langManager;
     }
 
      /**
@@ -31,10 +34,20 @@ class ApiController extends Controller
     }
 
     /**
-     * @Route("/public/api/home" , name="home_public_api")
+     * @Route("/public/api/popularLanguages" , name="popularLanguages")
      */
-    public function HomePublicApi(Request $request)
+    public function popularLanguages(Request $request)
     {
-        return new JsonResponse(array('response'=>'This is public api rest!'));
+        $items = $this->fetch->getLanguages();
+        $response = [];
+
+        foreach($items as $item){
+            if($item['language']){
+                $response[$item['language']]['language'] = $item['language'];
+                $response[$item['language']]['numbRepos'] = $this->langManager->numRepousingLanguage($item['language'], $items); 
+                $response[$item['language']]['listRepos'] = $this->langManager->listRepousingLanguage($item['language'], $items); 
+            }
+        }
+        return new JsonResponse($response);
     }
 }

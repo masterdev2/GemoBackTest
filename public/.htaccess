@@ -1,0 +1,38 @@
+Options +SymLinksIfOwnerMatch 
+RewriteEngine On 
+RewriteCond %{REQUEST_FILENAME} !-f 
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+
+
+#******************Bloc pour l'authentification*******************
+#RewriteRule ^signin$ 0_connections/code/index.php [L]
+#RewriteRule ^sign-in$ 0_connections/code/index.php [L]
+#RewriteRule ^signup$ 0_connections/code/index.php?create_account=true [L]
+#RewriteRule ^sign-up$ 0_connections/code/index.php?create_account=true [L]
+#RewriteRule ^logout$ 0_connections/traitement/logout.php [L]
+
+#RewriteRule ^account/create$ 0_connections/traitement/create_account.php [L]
+#RewriteRule ^account/validation$ 0_connections/traitement/create_account.php [L]
+#RewriteRule ^account/confirmation$ 0_connections/code/10compte_valide.php [L]
+#RewriteRule ^account/require$ 0_connections/code/11edit_account.php [L]
+#RewriteRule ^account/update$ 0_connections/traitement/edit_account.php [L]
+
+#RewriteRule ^auth$ /0_connections/traitement/index.php [L]
+#RewriteRule ^password/reset$ 0_connections/traitement/reset_password.php [L]
+#RewriteRule ^captcha/form$ 0_connections/code/12captcha.php [L]
+#RewriteRule ^captcha/check$ 0_connections/traitement/check_captcha.php [L]
+#******************************************************************
+
+#******************Bloc pour le doc *******************
+RewriteRule ^docs/upload/(.*)B(.*)B(.*)B(.*)$ 0_ressources/inc/components/docs/index.php?IdTable=$1&IdLinkT=$2&IdAbo=$3&IdApps=$4 [L]
+RewriteRule ^docs/upload/(.*)B(.*)B(.*)$ 0_ressources/inc/components/docs/index.php?IdTable=$1&IdLinkT=$2&IdAbo=$3 [L]
+RewriteRule ^docs/upload/(.*)B(.*)$ 0_ressources/inc/components/docs/index.php?IdTable=$1&IdLinkT=$2 [L]
+
+#******************************************************************
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.*)$ index.php?$1 [L,QSA]

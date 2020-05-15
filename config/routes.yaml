@@ -1,0 +1,339 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+#-----------------------------------------------#
+################### Front ########################
+#-----------------------------------------------#
+
+#### fos rest api routes
+fos_oauth_server_token:
+  resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
+fos_oauth_server_authorize:
+  resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
+
+index:
+  path: /
+  controller: App\Controller\Front\Index::Pageindex
+
+contact:
+  path: /contact
+  controller: App\Controller\Front\Contact::pageContact
+
+SendMail:
+  path: /contact/sendMail
+  controller: App\Controller\Front\Contact::sendMail
+
+About:
+  path: /about
+  controller: App\Controller\Front\About::pageAbout
+
+#-----------------------------------------------#
+################# End Front #####################
+#-----------------------------------------------#
+
+home:
+  path: /login
+  controller: App\Controller\Admin\Home::show
+
+test:
+  path: /test
+  controller: App\Controller\Admin\Home::showTest
+
+welcome:
+  path: /admin
+  controller: App\Controller\Admin\Welcome::show
+
+auth:
+  path: /auth
+  controller: App\Controller\SecurityController::authenticate
+
+#-----------------------------------------------#
+################### News ########################
+#-----------------------------------------------#
+News:
+  path: /admin/news
+  controller: App\Controller\Admin\NewsC::listNews
+
+addNews:
+  path: /admin/news/ajouter
+  controller: App\Controller\Admin\NewsC::AddNews
+
+RequestAddNews:
+  path: /admin/news/request_add_news
+  controller: App\Controller\Admin\NewsC::RequestAddNews
+
+deleteNews:
+  path: /admin/delete_news/{news_id}
+  controller: App\Controller\Admin\NewsC::deleteNews
+
+modifNews:
+  path: /admin/modif_news/{news_id}
+  controller: App\Controller\Admin\NewsC::modifNews
+
+RequestModifNews:
+  path: /admin/request_modif_news/{news_id}
+  controller: App\Controller\Admin\NewsC::RequestModifNews
+
+uploadMedia:
+  path: /admin/news/upload_media
+  controller: App\Controller\Admin\NewsC::uploadMedia
+#-----------------------------------------------#
+################# End News ######################
+#-----------------------------------------------#
+
+
+Comptes:
+  path: /admin/comptes
+  controller: App\Controller\Admin\Comptes::listComptes
+
+Logs:
+  path: /admin/logs
+  controller: App\Controller\Admin\Logs::listLogs
+
+addCompte:
+  path: /admin/add_compte
+  controller: App\Controller\Admin\Comptes::addCompte
+
+deleteCompte:
+  path: /admin/delete_compte/{user_id}
+  controller: App\Controller\Admin\Comptes::deleteCompte
+
+updateCompte:
+  path: /admin/update_compte/{user_id}
+  controller: App\Controller\Admin\Comptes::updateCompte
+
+uploadAvatar:
+  path: /admin/upload_avatar/{user_id}
+  controller: App\Controller\Admin\Comptes::uploadAvatar
+
+renewCompte:
+  path: /admin/renew_compte/{user_id}
+  controller: App\Controller\Admin\Comptes::renewCompte
+
+Permissions:
+  path: /admin/permissions
+  controller: App\Controller\Admin\Permissions::listPermissions
+
+addPermission:
+  path: /admin/add_permission
+  controller: App\Controller\Admin\Permissions::addPermission
+
+deletePermission:
+  path: /admin/delete_permission/{permission_id}
+  controller: App\Controller\Admin\Permissions::deletePermission
+
+updatePermission:
+  path: /admin/update_permission/{permission_id}
+  controller: App\Controller\Admin\Permissions::updatePermission
+
+Roles:
+  path: /admin/roles
+  controller: App\Controller\Admin\Roles::listRoles
+
+addRole:
+  path: /admin/add_role
+  controller: App\Controller\Admin\Roles::addRole
+
+updateRole:
+  path: /admin/update_role/{role_id}
+  controller: App\Controller\Admin\Roles::updateRole
+
+deleteRole:
+  path: /admin/delete_role/{role_id}
+  controller: App\Controller\Admin\Roles::deleteRole
+
+History:
+  path: /admin/history
+  controller: App\Controller\Admin\History::journalDeCnx
+
+Translate:
+  path: /admin/translate
+  controller: App\Controller\Admin\Translate::List
+
+TranslateRecherche:
+  path: /admin/recherche
+  controller: App\Controller\Admin\Translate::Recherche
+
+AddPhrase:
+  path: /admin/add_phrase
+  controller: App\Controller\Admin\Translate::addData
+
+updatePhrase:
+  path: /admin/update_phrase/{app_traduction_id}
+  controller: App\Controller\Admin\Translate::updatePhrase
+
+getDetails:
+  path: /admin/get_details
+  controller: App\Controller\Admin\Translate::getDetails
+
+Pays:
+  path: /admin/pays
+  controller: App\Controller\Admin\Pays::listPays
+
+AddPay:
+  path: /admin/add_pay
+  controller: App\Controller\Admin\Pays::addPays
+
+updatePay:
+  path: /admin/update_pay/{country_id}
+  controller: App\Controller\Admin\Pays::updatePay
+
+Sources:
+  path: /admin/sources
+  controller: App\Controller\Admin\Sources::listSources
+
+AddSource:
+  path: /admin/add_source
+  controller: App\Controller\Admin\Sources::addSource
+
+disableSource:
+  path: /admin/disable_source/{source_id}
+  controller: App\Controller\Admin\Sources::disableSource
+
+updateSource:
+  path: /admin/update_source/{source_id}
+  controller: App\Controller\Admin\Sources::updateSource
+
+Liens:
+  path: /admin/liens
+  controller: App\Controller\Admin\Liens::listLiens
+
+AddLien:
+  path: /admin/add_lien
+  controller: App\Controller\Admin\Liens::addLien
+
+disableSite:
+  path: /admin/disable_site/{authority_id}
+  controller: App\Controller\Admin\Liens::disableSite
+
+updateSite:
+  path: /admin/update_site/{authority_id}
+  controller: App\Controller\Admin\Liens::updateSite
+
+getLiensBySite:
+  path: /admin/links/{authority_id}
+  controller: App\Controller\Admin\Liens::getLiensBySite
+
+addUrl:
+  path: /admin/add_url
+  controller: App\Controller\Admin\Liens::addUrl
+
+updateUrl:
+  path: /admin/update_url/{link_id}
+  controller: App\Controller\Admin\Liens::updateUrl
+
+actifUrl:
+  path: /admin/actif_url/{link_id}
+  controller: App\Controller\Admin\Liens::actifUrl
+
+
+#-----------------------------------------------#
+################### Support #####################
+#-----------------------------------------------#
+
+Media:
+  path: /admin/medias
+  controller: App\Controller\Admin\Supports::Medias
+
+changeColor:
+  path: /admin/change_color/{media_id}
+  controller: App\Controller\Admin\Supports::changeColor
+
+Supports:
+  path: /admin/supports
+  controller: App\Controller\Admin\Supports::Supports
+
+addSupport:
+  path: /admin/add_support
+  controller: App\Controller\Admin\Supports::addSupport
+
+updateSupport:
+  path: /admin/update_support/{support_id}
+  controller: App\Controller\Admin\Supports::updateSupport
+
+disableSupport:
+  path: /admin/disable_support/{support_id}
+  controller: App\Controller\Admin\Supports::disableSupport
+
+KiosqueSp:
+  path: /admin/supportsApi
+  controller: App\Controller\Admin\supportApi::KiosqueSp
+
+###################################################################
+###################################################################  
+
+
+
+Api:
+  path: /admin/api
+  controller: App\Controller\Admin\Api::getApis
+
+getContentApi:
+  path: /admin/get_content_api/{link_id}
+  controller: App\Controller\Admin\Api::getContentApi
+
+AddAuthParams:
+  path: /admin/add_auth_params
+  controller: App\Controller\Admin\Api::AddAuthParams
+
+ApiGetNewsByRubrique:
+  path: /api/rubrics/{rubcric_id}/news
+  controller: App\Controller\Api\Index::getNewsByRubrique
+
+ApiGetRubriques:
+  path: /api/rubrics
+  controller: App\Controller\Api\Index::getRubrics
+
+ApiGetHome:
+  path: /api/lastNews
+  controller: App\Controller\Api\Index::getHome
+
+getNewsById:
+  path: /api/rubrics/{rubcric_id}/news/{idNews}
+  controller: App\Controller\Api\Index::getNewsById
+
+################# Kiosque
+getSupports:
+  path: /api/kiosque/all
+  controller: App\Controller\Api\Index::getSupports
+
+getEditionsBySupport:
+  path: /api/kiosque/{idSupport}/editions
+  controller: App\Controller\Api\Index::getEditions
+
+getEditionPages:
+  path: /api/kiosque/{idSupport}/editions/{date}/pages
+  controller: App\Controller\Api\Index::getEditionPages
+
+getPeriodicites:
+  path: /api/periodicites
+  controller: App\Controller\Api\Index::getPeriodicites
+
+getAllSupports:
+  path: /api/supports
+  controller: App\Controller\Api\Index::getAllSupports
+
+getAllMedias:
+  path: /api/medias
+  controller: App\Controller\Api\Index::getAllMedias
+
+getAllCountries:
+  path: /api/pays
+  controller: App\Controller\Api\Index::getAllCountries
+
+getThemes:
+  path: /api/themes
+  controller: App\Controller\Api\Index::getThemes
+
+searchNews:
+  path: /api/search
+  controller: App\Controller\Api\Index::searchNews
+
+getLatestNewsByRubric:
+  path: /api/rubric/{rubcric_id}/latestNews
+  controller: App\Controller\Api\Index::getLatestNewsByRubric
+
+Daily_News_Digest:
+  path: /api/dailyDigest
+  controller: App\Controller\Api\Index::getDailyNewsDigest
